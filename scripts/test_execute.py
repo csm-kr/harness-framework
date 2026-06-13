@@ -54,8 +54,8 @@ def phase_dir(tmp_project):
             {"step": 2, "name": "ui", "status": "pending"},
         ],
     }
-    (d / "index.json").write_text(json.dumps(index, indent=2, ensure_ascii=False))
-    (d / "step2.md").write_text("# Step 2: UI\n\nUI를 구현하세요.")
+    (d / "index.json").write_text(json.dumps(index, indent=2, ensure_ascii=False), encoding="utf-8")
+    (d / "step2.md").write_text("# Step 2: UI\n\nUI를 구현하세요.", encoding="utf-8")
 
     return d
 
@@ -126,14 +126,14 @@ class TestJsonHelpers:
     def test_save_ensures_ascii_false(self, tmp_path):
         p = tmp_path / "test.json"
         ex.StepExecutor._write_json(p, {"한글": "테스트"})
-        raw = p.read_text()
+        raw = p.read_text(encoding="utf-8")
         assert "한글" in raw
         assert "\\u" not in raw
 
     def test_save_indented(self, tmp_path):
         p = tmp_path / "test.json"
         ex.StepExecutor._write_json(p, {"a": 1})
-        raw = p.read_text()
+        raw = p.read_text(encoding="utf-8")
         assert "\n" in raw
 
     def test_load_nonexistent_raises(self, tmp_path):
@@ -199,18 +199,18 @@ class TestLoadGuardrails:
 
 class TestBuildStepContext:
     def test_includes_completed_with_summary(self, phase_dir):
-        index = json.loads((phase_dir / "index.json").read_text())
+        index = json.loads((phase_dir / "index.json").read_text(encoding="utf-8"))
         result = ex.StepExecutor._build_step_context(index)
         assert "Step 0 (setup): 프로젝트 초기화 완료" in result
         assert "Step 1 (core): 핵심 로직 구현" in result
 
     def test_excludes_pending(self, phase_dir):
-        index = json.loads((phase_dir / "index.json").read_text())
+        index = json.loads((phase_dir / "index.json").read_text(encoding="utf-8"))
         result = ex.StepExecutor._build_step_context(index)
         assert "ui" not in result
 
     def test_excludes_completed_without_summary(self, phase_dir):
-        index = json.loads((phase_dir / "index.json").read_text())
+        index = json.loads((phase_dir / "index.json").read_text(encoding="utf-8"))
         del index["steps"][0]["summary"]
         result = ex.StepExecutor._build_step_context(index)
         assert "setup" not in result
@@ -222,7 +222,7 @@ class TestBuildStepContext:
         assert result == ""
 
     def test_has_header(self, phase_dir):
-        index = json.loads((phase_dir / "index.json").read_text())
+        index = json.loads((phase_dir / "index.json").read_text(encoding="utf-8"))
         result = ex.StepExecutor._build_step_context(index)
         assert result.startswith("## 이전 Step 산출물")
 
@@ -280,7 +280,7 @@ class TestUpdateTopIndex:
     def test_completed(self, executor, top_index):
         executor._top_index_file = top_index
         executor._update_top_index("completed")
-        data = json.loads(top_index.read_text())
+        data = json.loads(top_index.read_text(encoding="utf-8"))
         mvp = next(p for p in data["phases"] if p["dir"] == "0-mvp")
         assert mvp["status"] == "completed"
         assert "completed_at" in mvp
@@ -288,7 +288,7 @@ class TestUpdateTopIndex:
     def test_error(self, executor, top_index):
         executor._top_index_file = top_index
         executor._update_top_index("error")
-        data = json.loads(top_index.read_text())
+        data = json.loads(top_index.read_text(encoding="utf-8"))
         mvp = next(p for p in data["phases"] if p["dir"] == "0-mvp")
         assert mvp["status"] == "error"
         assert "failed_at" in mvp
@@ -296,7 +296,7 @@ class TestUpdateTopIndex:
     def test_blocked(self, executor, top_index):
         executor._top_index_file = top_index
         executor._update_top_index("blocked")
-        data = json.loads(top_index.read_text())
+        data = json.loads(top_index.read_text(encoding="utf-8"))
         mvp = next(p for p in data["phases"] if p["dir"] == "0-mvp")
         assert mvp["status"] == "blocked"
         assert "blocked_at" in mvp
@@ -304,16 +304,16 @@ class TestUpdateTopIndex:
     def test_other_phases_unchanged(self, executor, top_index):
         executor._top_index_file = top_index
         executor._update_top_index("completed")
-        data = json.loads(top_index.read_text())
+        data = json.loads(top_index.read_text(encoding="utf-8"))
         polish = next(p for p in data["phases"] if p["dir"] == "1-polish")
         assert polish["status"] == "pending"
 
     def test_nonexistent_dir_is_noop(self, executor, top_index):
         executor._top_index_file = top_index
         executor._phase_dir_name = "no-such-dir"
-        original = json.loads(top_index.read_text())
+        original = json.loads(top_index.read_text(encoding="utf-8"))
         executor._update_top_index("completed")
-        after = json.loads(top_index.read_text())
+        after = json.loads(top_index.read_text(encoding="utf-8"))
         for p_before, p_after in zip(original["phases"], after["phases"]):
             assert p_before["status"] == p_after["status"]
 
@@ -449,7 +449,7 @@ class TestInvokeClaude:
 
         output_file = executor._phase_dir / "step2-output.json"
         assert output_file.exists()
-        data = json.loads(output_file.read_text())
+        data = json.loads(output_file.read_text(encoding="utf-8"))
         assert data["step"] == 2
         assert data["name"] == "ui"
         assert data["exitCode"] == 0

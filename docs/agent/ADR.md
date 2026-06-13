@@ -1,5 +1,7 @@
 # Architecture Decision Records
 
+> **Refs**: [ARCHITECTURE](../dev/ARCHITECTURE.md) · [ISSUES](./ISSUES.md) · [RULES](./RULES.md)
+
 ## 철학
 {프로젝트의 핵심 가치관 (예: MVP 속도 최우선. 외부 의존성 최소화. 작동하는 최소 구현을 선택.)}
 
