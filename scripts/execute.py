@@ -182,7 +182,7 @@ class StepExecutor:
         docs_dir = ROOT / "docs"
         if docs_dir.is_dir():
             for doc in sorted(docs_dir.rglob("*.md")):
-                if doc.name == "README.md":
+                if doc.name in ("INDEX.md", "README.md"):
                     continue
                 rel = doc.relative_to(docs_dir).as_posix()
                 sections.append(f"## {rel}\n\n{doc.read_text(encoding='utf-8')}")
@@ -238,10 +238,13 @@ class StepExecutor:
             sys.exit(1)
 
         prompt = preamble + step_file.read_text(encoding="utf-8")
+        # 헤드리스 배치 표식: Stop hook(loop_check)이 ack/체크리스트 주입을 건너뛰고
+        # 기계 게이트만 하드 실패로 적용하도록 한다. 실질 게이트는 step AC 자가검증.
+        env = {**os.environ, "HARNESS_HEADLESS": "1"}
         result = subprocess.run(
             ["claude", "-p", "--dangerously-skip-permissions", "--output-format", "json", prompt],
             cwd=self._root, capture_output=True, text=True,
-            encoding="utf-8", errors="replace", timeout=1800,
+            encoding="utf-8", errors="replace", timeout=1800, env=env,
         )
 
         if result.returncode != 0:
