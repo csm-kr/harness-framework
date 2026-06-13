@@ -7,7 +7,11 @@ tsconfig.tsbuildinfo
 # python
 __pycache__/
 *.pyc
+.pytest_cache/
 
 # phase execution outputs
 phases/**/phase*-output.json
 phases/**/step*-output.json
+
+# loop check ack (diff-signature bound; not shared)
+.claude/.loop-ack
