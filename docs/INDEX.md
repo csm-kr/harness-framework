@@ -1,10 +1,12 @@
 # 문서 인덱스 (LLM Wiki)
 
+> **이건 `docs/` 정본의 인덱스다.** 프레임워크 자체(워크플로우·실행·구조)에 대한 설명은 루트 [README.md](../README.md) 를 봐라.
+
 이 디렉토리는 **LLM Wiki**(라이브 위키, Karpathy [패턴](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f))다. 역할별 정본 문서가 서로 **Refs**(상대 링크)로 교차 연결되고, 의미 있는 변경은 [LOG.md](./LOG.md)에 append 한다. 유지보수 루프(ingest→query→lint)와 doc-update 라우팅은 [CLAUDE.md](../CLAUDE.md) §LLM Wiki 참조.
 
 - 각 문서는 스켈레톤(`{placeholder}`)이며 프로젝트에 맞게 채운다.
 - 각 문서 상단의 `> **Refs**:` 줄이 끊기면(대상 없음) lint에서 고아로 잡는다.
-- `scripts/execute.py`가 이 디렉토리 전체(`docs/**/*.md`)와 `CLAUDE.md`를 매 step 프롬프트에 가드레일로 주입한다.
+- `scripts/execute.py`가 이 디렉토리 전체(`docs/**/*.md`, 단 이 인덱스 `INDEX.md`는 제외)와 `CLAUDE.md`를 매 step 프롬프트에 가드레일로 주입한다.
 
 ## 🧑‍💻 유저 — `user/`
 | 문서 | 내용 |

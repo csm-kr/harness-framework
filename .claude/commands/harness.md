@@ -33,7 +33,12 @@
 구현을 위해 구체화하거나 기술적으로 결정해야 할 사항이 있으면 사용자에게 제시하고 논의한다.
 
 - 필수 스킬: gstack `/office-hours`(전문가 상담)와 superpowers `brainstorming`(대안 발산)을 사용해 논의를 구체화한다. 두 스킬이 설치된 플러그인에 없으면 A 단계에서 해당 스킬 추가 설치를 요청한다. 결정된 사항은 `docs/agent/ADR.md`에 기록한다.
-- **검증 방식·가드 합의**: 프로젝트 유형(웹/모바일/게임/이미지 생성 등)에 따라 산출물을 어떻게 검증할지를 정하고, **어떤 검증 도구가 먼저 필요한지, 어떤 가드 훅(TDD 가드·위험 명령 차단·`.env` 접근 차단 등)을 켤지 사용자에게 알리고 합의한다**. 이 결정은 D 설계의 "검증 도구·훅 우선" 원칙으로 이어진다.
+- **검증 방식·가드 합의**: 프로젝트 유형(웹/모바일/게임/이미지 생성 등)에 따라 산출물을 어떻게 검증할지를 정하고, **어떤 검증 도구가 먼저 필요한지, 어떤 가드 훅(TDD 가드·위험 명령 차단·`.env` 접근 차단·멈춤 게이트 등)을 켤지 사용자에게 알리고 합의한다**. 이 결정은 D 설계의 "검증 도구·훅 우선" 원칙으로 이어진다.
+- **CRITICAL — 프레임워크 기본 검증/가드는 web 종속이다. 이 프로젝트 성격(PRD·스택)에 맞게 전부 교체해야 한다**: 기본 제공물은 모두 웹/Node 전제로 짜여 있다. 이 논의에서 아래를 **무엇으로 바꿀지** 합의하고, **실제 교체는 D 설계의 첫 설정 step(가드 훅·도구 설정)에서 구현**한다.
+  - **lint·build·test 커맨드** (`CLAUDE.md §명령어`, `loop_check.py`가 멈춤 게이트로 파싱) — 웹=`npm run lint/build/test`. 게임=엔진 빌드·구동, 이미지 생성=생성 결과 검증, 파이썬=`ruff`/`pytest` 등으로 교체. 비-Node 는 §명령어 줄 주석에 `# gate: lint|build|test` 를 달아 게이트 역할을 지정한다.
+  - **TDD 가드** (`.claude/hooks/tdd-guard.sh`) — **현재 `.ts/.tsx/.js/.jsx` 전용이고 테스트 탐지 경로도 web 배치(`__tests__/`, `tests/`)를 전제한다.** 이 프로젝트의 구현 파일 확장자(예: `.py`·`.gd`·`.rs`)와 테스트 배치 규칙에 맞게 탐지 로직을 바꾼다. 안 바꾸면 비-web 프로젝트에선 TDD 가드가 무력해진다.
+  - **위험 명령 차단** (`.claude/settings.json` 의 `PreToolUse[Bash]` 정규식) — 기본은 `rm -rf`·`git push --force`·`DROP TABLE` 등. 이 프로젝트에서 파괴적인 명령(예: 엔진 `clean`, 데이터셋 삭제 스크립트)을 정규식에 가감한다.
+  - **정성 체크리스트**(`/review`·`/loop-check` 14항목) — 이 프로젝트에 없는 렌즈(예: 화면 없는 CLI 는 스크린·디자인 항목)는 N/A 처리 규칙을 합의한다.
 - **CLAUDE.md 완성 (D 설계 전 선행)**: 논의에서 합의된 내용으로 `CLAUDE.md`의 해당 카테고리 placeholder를 이 개발에 맞게 채워 완성한다:
   - **기술 스택 · 아키텍처 CRITICAL 규칙 · 개발 프로세스** — 합의된 값으로 채운다.
   - **명령어** — 프로젝트 스택에 맞게 교체한다(웹=npm/playwright, 게임=엔진 빌드·구동, 이미지 생성=생성 결과 검증 등). 웹 전용 예시를 그대로 두지 마라.
@@ -56,13 +61,18 @@
 > | 이미지 생성 | 생성 결과 검증 도구 — 기준 대비 비교·품질 체크 |
 > | 그 외 | 산출물을 headless로 검증할 수 있는 전용 도구 |
 
-**가드 훅·도구 설정 (논의 후)**: C 논의에서 합의한 검증 도구와 가드 훅은 phase의 **첫 설정 step**에서 `.claude/hooks/`와 `.claude/settings.json`에 구성하고 동작을 확인한 뒤 기능 step으로 넘어간다. 프레임워크 기본 제공 훅:
+**가드 훅·도구 설정 (논의 후, 첫 설정 step) — 여기서 web 종속 기본값을 이 프로젝트에 맞게 교체한다**: C 논의에서 합의한 검증 도구·가드 훅 교체안을 phase의 **첫 설정 step**에서 실제로 구현한다. `.claude/hooks/`와 `.claude/settings.json`을 합의안대로 고치고, 동작을 확인한 뒤 기능 step으로 넘어간다.
 
-- **TDD 가드** (`PreToolUse[Write|Edit]` → `.claude/hooks/tdd-guard.sh`): 대응 테스트 파일이 없으면 구현 코드 편집을 차단한다(deny). 테스트 탐색 경로는 프로젝트 테스트 배치 규칙에 맞게 조정한다.
-- **위험 명령 차단** (`PreToolUse[Bash]`): `rm -rf`, `git push --force`, `git reset --hard`, `DROP TABLE`, `db reset` 매칭 시 `exit 2`로 실행을 막는다. 정규식은 프로젝트 위험 명령에 맞게 가감한다.
-- **`.env` 접근 차단** (`permissions.deny`): `.env*`의 Read/Write/Edit 및 `cat/head/tail/less/more .env*` Bash를 거부한다.
+> **CRITICAL: 아래 기본 제공물은 모두 web/Node 전제다. C 논의 합의대로 이 step에서 교체하지 않으면 비-web 프로젝트에선 가드가 무력해진다.** 무엇을 무엇으로 바꿀지는 C 논의 §검증 방식·가드 합의 참조.
+
+- **TDD 가드** (`PreToolUse[Write|Edit]` → `.claude/hooks/tdd-guard.sh`): 대응 테스트 파일이 없으면 구현 코드 편집을 차단한다(deny). **현재 `.ts/.tsx/.js/.jsx` 확장자 전용이고 테스트 탐지도 web 배치(`__tests__/`·`tests/`) 전제다.** 이 프로젝트의 구현 확장자(`.py`·`.gd`·`.rs` 등)와 테스트 배치 규칙에 맞게 탐지 로직을 **반드시** 교체한다.
+- **위험 명령 차단** (`PreToolUse[Bash]`): `rm -rf`, `git push --force`, `git reset --hard`, `DROP TABLE`, `db reset` 매칭 시 `exit 2`로 실행을 막는다. 정규식은 이 프로젝트의 파괴적 명령에 맞게 가감한다.
+- **`.env` 접근 차단** (`permissions.deny`): `.env*`의 Read/Write/Edit 및 `cat/head/tail/less/more .env*` Bash를 거부한다. (스택 무관 — 대개 그대로 둔다.)
+- **멈추기 전 기계 게이트** (`Stop` → `scripts/loop_check.py --gate`): 작업을 "끝났다"고 멈추려 할 때 lint·build(CLAUDE.md §명령어에서 파싱) 를 돌려 red 면 차단한다. **게이트 커맨드는 §명령어를 채워야 작동한다** — 비-Node 는 §명령어 줄 주석에 `# gate: lint|build|test` 를 달아 역할을 지정한다(미구성이면 게이트 skip). 코드(`docs/`·`phases/`·`.claude/`·`*.md` 외) 변경이 없으면 skip. **대화형 세션**에선 green 이어도 `/loop-check` ack 전이면 1회 차단하며 통합 체크리스트를 주입한다. **헤드리스(execute.py 배치, `HARNESS_HEADLESS=1`)** 에선 ack/주입 없이 기계 게이트만 하드 실패로 적용하고, 거기선 step AC 자가검증이 실질 게이트다. (`/loop-check` 는 빌트인 `/loop`(인터벌 반복)과 다른 명령이다.)
 
 > step에서 이 가드를 우회하지 마라. 이유: TDD·안전 규칙은 `docs/agent/RULES.md`의 불변 규칙이며, 훅이 막은 작업은 규칙 위반 신호다.
+
+> **AC ↔ loop 연결**: "확인 기준"은 3계층이다 — ① **step AC**(step{N}.md, execute.py 세션이 자가검증하는 전방 게이트) · ② **기계 게이트**(green; Stop 하드게이트=lint·build, 전체 lint·build·test 는 `/loop-check`·step AC) · ③ **정성 체크리스트**(누적 diff ↔ 정본 대조, `/loop-check`=`/review` 통합 체크리스트 4그룹·14항목 + 기계 게이트 + ack). **CLAUDE.md §명령어의 검증 커맨드 = 모든 step AC의 객관적 공통 부분집합**이며, loop-check(②+③)은 그것을 멈추기 전에 강제하는 의식이다. step AC가 "이 step이 제 일을 했는가"를 묻는다면, loop은 "누적 변경이 여전히 모든 정본과 일관되고 빌드가 통과하는가"를 묻는다. 비-Node 스택은 §명령어 줄 주석에 `# gate: lint|build|test` 를 달아 게이트 커맨드를 지정한다.
 
 설계 원칙:
 
