@@ -1,6 +1,6 @@
 # 코딩 컨벤션
 
-> **Refs**: [ARCHITECTURE](./ARCHITECTURE.md) · [RULES](../agent/RULES.md)
+> **Refs**: [ARCHITECTURE](./ARCHITECTURE.md) · [RULES](./RULES.md)
 
 ## 스택
 - {프레임워크 (예: Next.js 15 App Router)}

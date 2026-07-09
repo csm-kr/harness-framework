@@ -1,6 +1,6 @@
 # PRD: {프로젝트명}
 
-> **Refs**: [USER_JOURNEY](./USER_JOURNEY.md) · [USER_FLOW](./USER_FLOW.md) · [DESIGN_GUIDE](../design/DESIGN_GUIDE.md) · [ADR](../agent/ADR.md)
+> **Refs**: [USER_JOURNEY](./USER_JOURNEY.md) · [USER_FLOW](./USER_FLOW.md) · [DESIGN_GUIDE](./DESIGN_GUIDE.md) · [ADR](./ADR.md)
 
 ## 제품 정의
 {이 제품이 무엇인지 한 문장으로}
@@ -24,4 +24,4 @@
 ## 디자인 방향
 - {디자인 방향 (예: 다크모드 고정, 미니멀)}
 - {색상 (예: 무채색 + 포인트 1가지)}
-- 상세 토큰·컴포넌트는 [DESIGN_GUIDE](../design/DESIGN_GUIDE.md) 참조
+- 상세 토큰·컴포넌트는 [DESIGN_GUIDE](./DESIGN_GUIDE.md) 참조

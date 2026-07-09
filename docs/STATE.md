@@ -1,8 +1,8 @@
 # 상태 모델
 
-> **Refs**: [DB](../dev/DB.md) · [ARCHITECTURE](../dev/ARCHITECTURE.md)
+> **Refs**: [DB](./DB.md) · [ARCHITECTURE](./ARCHITECTURE.md)
 
-앱 레벨(휘발성) 상태와 서버 영속 상태를 구분한다. 저장 스키마는 [DB](../dev/DB.md).
+앱 레벨(휘발성) 상태와 서버 영속 상태를 구분한다. 저장 스키마는 [DB](./DB.md).
 
 ## 앱 레벨 상태 (클라이언트, 휘발성)
 | 상태 | 위치 | 수명 | 비고 |

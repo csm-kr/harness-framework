@@ -1,8 +1,8 @@
 # 화면 전환 맵
 
-> **Refs**: [SCREENS](./SCREENS.md) · [USER_FLOW](../user/USER_FLOW.md)
+> **Refs**: [SCREENS](./SCREENS.md) · [USER_FLOW](./USER_FLOW.md)
 
-화면 간 전환과 조건부 UI 상태를 정의한다. 사용자 관점 단계는 [USER_FLOW](../user/USER_FLOW.md), 화면 상세는 [SCREENS](./SCREENS.md).
+화면 간 전환과 조건부 UI 상태를 정의한다. 사용자 관점 단계는 [USER_FLOW](./USER_FLOW.md), 화면 상세는 [SCREENS](./SCREENS.md).
 
 ## 전환 맵
 ```

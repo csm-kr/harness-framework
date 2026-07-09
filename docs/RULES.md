@@ -1,6 +1,6 @@
 # 불변 규칙 (RULES)
 
-> **Refs**: [ISSUES](./ISSUES.md) · [ADR](./ADR.md) · [ARCHITECTURE](../dev/ARCHITECTURE.md) · [SECURITY](../security/SECURITY.md)
+> **Refs**: [ISSUES](./ISSUES.md) · [ADR](./ADR.md) · [ARCHITECTURE](./ARCHITECTURE.md) · [SECURITY](./SECURITY.md)
 
 절대 어기면 안 되는 규칙. 모든 step·리뷰는 이 규칙을 기준으로 검증한다. CLAUDE.md의 CRITICAL 규칙과 함께 최우선으로 적용된다.
 
@@ -8,14 +8,14 @@
 
 ## 아키텍처
 - R1: 모든 외부 API/DB 접근은 서버(`app/api/` route handler, `services/`)에서만 한다. 클라이언트에서 직접 호출 금지.
-- R2: [ARCHITECTURE](../dev/ARCHITECTURE.md)의 디렉토리 구조를 벗어나지 않는다.
+- R2: [ARCHITECTURE](./ARCHITECTURE.md)의 디렉토리 구조를 벗어나지 않는다.
 
 ## 보안
-- R3: 리소스 접근은 서버에서 소유자/권한을 검증한다 ([SECURITY](../security/SECURITY.md)).
+- R3: 리소스 접근은 서버에서 소유자/권한을 검증한다 ([SECURITY](./SECURITY.md)).
 - R4: 비밀 값을 코드·로그·클라이언트 번들에 노출하지 않는다.
 
 ## 데이터
-- R5: 스키마 변경은 마이그레이션으로만 한다 ([DB](../dev/DB.md)). 수동 SQL 금지.
+- R5: 스키마 변경은 마이그레이션으로만 한다 ([DB](./DB.md)). 수동 SQL 금지.
 - R6: 파괴적 작업(삭제·덮어쓰기)은 되돌릴 수 없으므로 명시적 확인 없이 수행하지 않는다.
 
 ## 프로세스
