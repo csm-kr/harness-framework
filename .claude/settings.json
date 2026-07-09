@@ -15,6 +15,16 @@
     ]
   },
   "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "PY=python3; \"$PY\" -c '' >/dev/null 2>&1 || PY=python; \"$PY\" \"$CLAUDE_PROJECT_DIR/.claude/hooks/log_prompt.py\""
+          }
+        ]
+      }
+    ],
     "PreToolUse": [
       {
         "matcher": "Bash",
