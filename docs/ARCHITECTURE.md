@@ -1,6 +1,6 @@
 # 아키텍처
 
-> **Refs**: [ADR](../agent/ADR.md) · [DB](./DB.md) · [API](./API.md) · [STATE](../agent/STATE.md) · [RULES](../agent/RULES.md)
+> **Refs**: [ADR](./ADR.md) · [DB](./DB.md) · [API](./API.md) · [STATE](./STATE.md) · [RULES](./RULES.md)
 
 ## 디렉토리 구조
 ```
@@ -24,7 +24,7 @@ src/
 
 ## 상태 관리
 {상태 관리 방식 (예: 서버 상태는 Server Components, 클라이언트 상태는 useState/useReducer)}
-앱 레벨 vs 서버 영속 상태 구분은 [STATE](../agent/STATE.md) 참조.
+앱 레벨 vs 서버 영속 상태 구분은 [STATE](./STATE.md) 참조.
 
 ## 프로덕션 스택
 | 레이어 | 사용 기술 | 비고 |

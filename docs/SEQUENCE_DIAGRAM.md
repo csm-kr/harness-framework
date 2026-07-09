@@ -1,8 +1,8 @@
 # Sequence Diagram
 
-> **Refs**: [API](./API.md) · [SCREEN_FLOW](../design/SCREEN_FLOW.md)
+> **Refs**: [API](./API.md) · [SCREEN_FLOW](./SCREEN_FLOW.md)
 
-주요 동작의 컴포넌트 호출 순서를 기술한다. 화면 단위 흐름은 [SCREEN_FLOW](../design/SCREEN_FLOW.md), API 계약은 [API](./API.md) 참조.
+주요 동작의 컴포넌트 호출 순서를 기술한다. 화면 단위 흐름은 [SCREEN_FLOW](./SCREEN_FLOW.md), API 계약은 [API](./API.md) 참조.
 
 ## {동작 1: 예 — 로그인}
 ```

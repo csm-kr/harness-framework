@@ -1,13 +1,13 @@
 # API
 
-> **Refs**: [ARCHITECTURE](./ARCHITECTURE.md) · [SECURITY](../security/SECURITY.md) · [SEQUENCE_DIAGRAM](./SEQUENCE_DIAGRAM.md)
+> **Refs**: [ARCHITECTURE](./ARCHITECTURE.md) · [SECURITY](./SECURITY.md) · [SEQUENCE_DIAGRAM](./SEQUENCE_DIAGRAM.md)
 
 route handler 엔드포인트, 권한, 상태 코드를 정의한다.
 
 ## 공통 규칙
 - 모든 API 로직은 `app/api/` route handler에서만 처리한다.
 - 응답은 `{ data }` 또는 `{ error }` 형태로 통일한다.
-- 인증/인가 정책은 [SECURITY](../security/SECURITY.md) 참조.
+- 인증/인가 정책은 [SECURITY](./SECURITY.md) 참조.
 
 ## 엔드포인트
 

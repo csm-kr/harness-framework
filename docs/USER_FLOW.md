@@ -1,8 +1,8 @@
 # User Flow
 
-> **Refs**: [USER_JOURNEY](./USER_JOURNEY.md) · [SCREEN_FLOW](../design/SCREEN_FLOW.md) · [SCREENS](../design/SCREENS.md)
+> **Refs**: [USER_JOURNEY](./USER_JOURNEY.md) · [SCREEN_FLOW](./SCREEN_FLOW.md) · [SCREENS](./SCREENS.md)
 
-목표 완료까지의 단계와 분기를 클릭 단위로 기술한다. 화면 전환 맵은 [SCREEN_FLOW](../design/SCREEN_FLOW.md)와 짝을 이룬다.
+목표 완료까지의 단계와 분기를 클릭 단위로 기술한다. 화면 전환 맵은 [SCREEN_FLOW](./SCREEN_FLOW.md)와 짝을 이룬다.
 
 ## 플로우 1: {목표 이름 (예: 회원가입 → 첫 작업 완료)}
 

@@ -1,6 +1,6 @@
 # 데이터베이스
 
-> **Refs**: [ARCHITECTURE](./ARCHITECTURE.md) · [API](./API.md) · [STATE](../agent/STATE.md)
+> **Refs**: [ARCHITECTURE](./ARCHITECTURE.md) · [API](./API.md) · [STATE](./STATE.md)
 
 ## 스키마 (Prisma)
 ```prisma

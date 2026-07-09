@@ -1,6 +1,6 @@
 # 디자인 가이드
 
-> **Refs**: [SCREENS](./SCREENS.md) · [SCREEN_FLOW](./SCREEN_FLOW.md) · [USER_FLOW](../user/USER_FLOW.md)
+> **Refs**: [SCREENS](./SCREENS.md) · [SCREEN_FLOW](./SCREEN_FLOW.md) · [USER_FLOW](./USER_FLOW.md)
 
 토큰·컴포넌트·금지 사항을 정의한다. 화면별 구성은 [SCREENS](./SCREENS.md), 전환은 [SCREEN_FLOW](./SCREEN_FLOW.md).
 

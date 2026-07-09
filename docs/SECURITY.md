@@ -1,6 +1,6 @@
 # 보안
 
-> **Refs**: [API](../dev/API.md) · [ENV](../dev/ENV.md) · [RULES](../agent/RULES.md)
+> **Refs**: [API](./API.md) · [ENV](./ENV.md) · [RULES](./RULES.md)
 
 위협 모델, 인증/인가, 비밀 관리, 데이터 보호를 정의한다.
 
@@ -18,10 +18,10 @@
 
 ## 인가
 - {역할/권한 모델 (예: owner / member / public)}
-- CRITICAL: 리소스 접근 시 소유자/권한을 서버에서 반드시 검증한다. 엔드포인트별 권한은 [API](../dev/API.md) 참조.
+- CRITICAL: 리소스 접근 시 소유자/권한을 서버에서 반드시 검증한다. 엔드포인트별 권한은 [API](./API.md) 참조.
 
 ## 비밀 관리
-- 비밀은 환경 변수로만 주입한다 ([ENV](../dev/ENV.md)).
+- 비밀은 환경 변수로만 주입한다 ([ENV](./ENV.md)).
 - CRITICAL: 비밀 값을 코드·로그·클라이언트 번들에 노출하지 않는다.
 - {키 로테이션 정책}
 

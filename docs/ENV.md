@@ -1,6 +1,6 @@
 # 환경 변수
 
-> **Refs**: [SECURITY](../security/SECURITY.md) · [DB](./DB.md)
+> **Refs**: [SECURITY](./SECURITY.md) · [DB](./DB.md)
 
 ## 변수 목록
 | 변수 | 용도 | 필수 | 예/기본값 |
@@ -9,7 +9,7 @@
 | `{API_KEY}` | {외부 서비스 인증} | ✅ | — |
 | `{OPTION}` | {선택 설정} | ❌ | {기본값} |
 
-- 비밀 값은 절대 커밋하지 않는다. 관리 정책은 [SECURITY](../security/SECURITY.md) 참조.
+- 비밀 값은 절대 커밋하지 않는다. 관리 정책은 [SECURITY](./SECURITY.md) 참조.
 - `.env.example`에 키만 두고 값은 비운다.
 
 ## LLM 파이프라인 (해당 시)

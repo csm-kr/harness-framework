@@ -7,24 +7,24 @@
 `docs/` 가 **정본(source of truth)**인 라이브 위키다([패턴](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f)). 세부 규칙·근거는 docs에 있고, 여기엔 **non-negotiable 요약 + 라우팅**만 둔다. 3계층: **원천**(요구사항 원문·외부 자료, 불변) · **위키**(`docs/`, LLM이 소유·Refs로 교차연결) · **스키마**(이 파일).
 
 1. **Read order** — ① CLAUDE.md → ② [docs/INDEX.md](./docs/INDEX.md)(인덱스) → ③ `phases/index.json`(현재 진행 step) → ④ 관련 정본(아래 라우팅) → ⑤ 필요 시 세부 문서 → ⑥ 변경 시 해당 정본 + [docs/LOG.md](./docs/LOG.md) 갱신.
-2. **불변 규칙 우선** — 모든 작업은 [docs/agent/RULES.md](./docs/agent/RULES.md)와 이 파일의 CRITICAL을 최우선으로 지킨다.
+2. **불변 규칙 우선** — 모든 작업은 [docs/RULES.md](./docs/RULES.md)와 이 파일의 CRITICAL을 최우선으로 지킨다.
 3. **유지보수 루프 (ingest → query → lint)** — 결정/변경이 생기면 ⓐ 관련 정본을 갱신하고 ⓑ 문서 상단 `> **Refs**:` 교차링크를 보강하고 ⓒ [docs/LOG.md](./docs/LOG.md)에 한 줄 append. 주기적으로 모순·낡은 내용·끊긴 Refs(고아)·누락 교차링크를 lint 한다.
 4. **Doc-update 라우팅** — 무엇을 바꾸면 어느 정본을 갱신하는가:
 
    | 변경 종류 | 갱신할 정본 |
    |---|---|
-   | 아키텍처/구조 | `docs/dev/ARCHITECTURE.md` |
-   | API/엔드포인트 | `docs/dev/API.md` |
-   | DB/스키마 | `docs/dev/DB.md` (+ 마이그레이션) |
-   | 코딩 규칙 | `docs/dev/CODING_CONVENTION.md` |
-   | 환경/시크릿 | `docs/dev/ENV.md` |
-   | 보안/인증/권한 | `docs/security/SECURITY.md` |
-   | 디자인/토큰/화면 | `docs/design/DESIGN_GUIDE.md` · `SCREENS.md` · `SCREEN_FLOW.md` |
-   | 제품/요구사항 | `docs/user/PRD.md` · `USER_JOURNEY.md` · `USER_FLOW.md` |
-   | 주요 결정 | `docs/agent/ADR.md` (append) |
-   | 개발 중 이슈 | `docs/agent/ISSUES.md` (3회 반복 → RULES 승격) |
-   | 불변 규칙 | `docs/agent/RULES.md` |
-   | 상태 모델 | `docs/agent/STATE.md` |
+   | 아키텍처/구조 | `docs/ARCHITECTURE.md` |
+   | API/엔드포인트 | `docs/API.md` |
+   | DB/스키마 | `docs/DB.md` (+ 마이그레이션) |
+   | 코딩 규칙 | `docs/CODING_CONVENTION.md` |
+   | 환경/시크릿 | `docs/ENV.md` |
+   | 보안/인증/권한 | `docs/SECURITY.md` |
+   | 디자인/토큰/화면 | `docs/DESIGN_GUIDE.md` · `SCREENS.md` · `SCREEN_FLOW.md` |
+   | 제품/요구사항 | `docs/PRD.md` · `USER_JOURNEY.md` · `USER_FLOW.md` |
+   | 주요 결정 | `docs/ADR.md` (append) |
+   | 개발 중 이슈 | `docs/ISSUES.md` (3회 반복 → RULES 승격) |
+   | 불변 규칙 | `docs/RULES.md` |
+   | 상태 모델 | `docs/STATE.md` |
 
 5. **Ref 규칙** — 각 문서는 상단에 `> **Refs**: [문서](상대경로) · …` 한 줄로 관련 정본을 가리킨다. Refs가 끊기면 lint에서 고아로 잡는다.
 6. **Completion summary** — 작업 끝에: 바꾼 것 · 읽은 문서 · 갱신한 문서 · 돌린 검증 · 남은 위험 · LOG append 여부.

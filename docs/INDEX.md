@@ -6,44 +6,44 @@
 
 - 각 문서는 스켈레톤(`{placeholder}`)이며 프로젝트에 맞게 채운다.
 - 각 문서 상단의 `> **Refs**:` 줄이 끊기면(대상 없음) lint에서 고아로 잡는다.
-- `scripts/execute.py`가 이 디렉토리 전체(`docs/**/*.md`, 단 이 인덱스 `INDEX.md`는 제외)와 `CLAUDE.md`를 매 step 프롬프트에 가드레일로 주입한다.
+- `scripts/execute.py`가 이 디렉토리 전체(`docs/*.md`, 단 이 인덱스 `INDEX.md`는 제외)와 `CLAUDE.md`를 매 step 프롬프트에 가드레일로 주입한다.
 
-## 🧑‍💻 유저 — `user/`
+## 🧑‍💻 유저
 | 문서 | 내용 |
 |---|---|
-| [PRD](./user/PRD.md) | 제품 정의·목표·핵심 기능·비목표 |
-| [USER_JOURNEY](./user/USER_JOURNEY.md) | 페르소나별 시간 축 서사 |
-| [USER_FLOW](./user/USER_FLOW.md) | 목표 완료까지의 단계·분기(클릭 단위) |
+| [PRD](./PRD.md) | 제품 정의·목표·핵심 기능·비목표 |
+| [USER_JOURNEY](./USER_JOURNEY.md) | 페르소나별 시간 축 서사 |
+| [USER_FLOW](./USER_FLOW.md) | 목표 완료까지의 단계·분기(클릭 단위) |
 
-## 🛠️ 개발자 — `dev/`
+## 🛠️ 개발자
 | 문서 | 내용 |
 |---|---|
-| [ARCHITECTURE](./dev/ARCHITECTURE.md) | 구조·프로덕션 스택·교체표 |
-| [DB](./dev/DB.md) | Prisma 스키마·파생값 |
-| [API](./dev/API.md) | route handler 엔드포인트·권한·상태 코드 |
-| [SEQUENCE_DIAGRAM](./dev/SEQUENCE_DIAGRAM.md) | 주요 동작의 컴포넌트 호출 순서 |
-| [CODING_CONVENTION](./dev/CODING_CONVENTION.md) | 스택·네이밍·타입·금지 규칙 |
-| [ENV](./dev/ENV.md) | 환경 변수·LLM 파이프라인 |
+| [ARCHITECTURE](./ARCHITECTURE.md) | 구조·프로덕션 스택·교체표 |
+| [DB](./DB.md) | Prisma 스키마·파생값 |
+| [API](./API.md) | route handler 엔드포인트·권한·상태 코드 |
+| [SEQUENCE_DIAGRAM](./SEQUENCE_DIAGRAM.md) | 주요 동작의 컴포넌트 호출 순서 |
+| [CODING_CONVENTION](./CODING_CONVENTION.md) | 스택·네이밍·타입·금지 규칙 |
+| [ENV](./ENV.md) | 환경 변수·LLM 파이프라인 |
 
-## 🎨 디자이너 — `design/`
+## 🎨 디자이너
 | 문서 | 내용 |
 |---|---|
-| [DESIGN_GUIDE](./design/DESIGN_GUIDE.md) | 토큰·컴포넌트·금지 사항 |
-| [SCREENS](./design/SCREENS.md) | 화면별 구성·카피 카탈로그 |
-| [SCREEN_FLOW](./design/SCREEN_FLOW.md) | 화면 전환 맵·조건부 UI 상태 |
+| [DESIGN_GUIDE](./DESIGN_GUIDE.md) | 토큰·컴포넌트·금지 사항 |
+| [SCREENS](./SCREENS.md) | 화면별 구성·카피 카탈로그 |
+| [SCREEN_FLOW](./SCREEN_FLOW.md) | 화면 전환 맵·조건부 UI 상태 |
 
-## 🔒 보안 — `security/`
+## 🔒 보안
 | 문서 | 내용 |
 |---|---|
-| [SECURITY](./security/SECURITY.md) | 위협 모델·인증/인가·비밀·데이터 보호 |
+| [SECURITY](./SECURITY.md) | 위협 모델·인증/인가·비밀·데이터 보호 |
 
-## 🤖 에이전트 — `agent/`
+## 🤖 에이전트
 | 문서 | 내용 |
 |---|---|
-| [ADR](./agent/ADR.md) | 주요 결정 기록 |
-| [STATE](./agent/STATE.md) | 앱 레벨 vs 서버 영속 상태 |
-| [ISSUES](./agent/ISSUES.md) | 개발 중 발생한 이슈·반복 문제(3회+ → RULES 승격) |
-| [RULES](./agent/RULES.md) | 절대 어기면 안 되는 불변 규칙 |
+| [ADR](./ADR.md) | 주요 결정 기록 |
+| [STATE](./STATE.md) | 앱 레벨 vs 서버 영속 상태 |
+| [ISSUES](./ISSUES.md) | 개발 중 발생한 이슈·반복 문제(3회+ → RULES 승격) |
+| [RULES](./RULES.md) | 절대 어기면 안 되는 불변 규칙 |
 
 ## 🔌 플러그인 (워크플로우 필수)
 `/harness` 워크플로우(A 단계)는 두 플러그인의 스킬을 사용한다.
